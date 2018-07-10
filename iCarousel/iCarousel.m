@@ -1257,7 +1257,10 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
     }
     else
     {
-        [_contentView addSubview:[self containView:view]];
+        UIView *containView = [self containView:view];
+        if(containView){
+            @try{[_contentView addSubview:containView];}@catch(NSException *exc){}
+        }
     }
     view.superview.layer.opacity = 0.0;
     [self transformItemView:view atIndex:index];
